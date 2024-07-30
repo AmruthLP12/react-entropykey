@@ -2,15 +2,14 @@
 import React, { useState, useRef } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap-icons/font/bootstrap-icons.css';
-// import '../Styles/EntropyKey.css';
 
-const EntropyKey = () => {
+const EntropyKey = ({character,tokenlen}) => {
   const [token, setToken] = useState('');
   const videoRef = useRef(null);
   const tokenOutputRef = useRef(null);
 
   const generateTokenFromVideo = async (length) => {
-    const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()-_=+[]{}|;:",.<>?/~`';
+    const characters = character || 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()-_=+[]{}|;:",.<>?/~`';
     let token = '';
 
     const stream = await navigator.mediaDevices.getUserMedia({ video: true });
@@ -37,7 +36,7 @@ const EntropyKey = () => {
   };
 
   const handleGenerateToken = async () => {
-    const tokenLength = 16;
+    const tokenLength = tokenlen || 16;
     const newToken = await generateTokenFromVideo(tokenLength);
     setToken(newToken);
   };

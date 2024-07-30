@@ -19,9 +19,9 @@ function _unsupportedIterableToArray(r, a) { if (r) { if ("string" == typeof r) 
 function _arrayLikeToArray(r, a) { (null == a || a > r.length) && (a = r.length); for (var e = 0, n = Array(a); e < a; e++) n[e] = r[e]; return n; }
 function _iterableToArrayLimit(r, l) { var t = null == r ? null : "undefined" != typeof Symbol && r[Symbol.iterator] || r["@@iterator"]; if (null != t) { var e, n, i, u, a = [], f = !0, o = !1; try { if (i = (t = t.call(r)).next, 0 === l) { if (Object(t) !== t) return; f = !1; } else for (; !(f = (e = i.call(t)).done) && (a.push(e.value), a.length !== l); f = !0); } catch (r) { o = !0, n = r; } finally { try { if (!f && null != t["return"] && (u = t["return"](), Object(u) !== u)) return; } finally { if (o) throw n; } } return a; } }
 function _arrayWithHoles(r) { if (Array.isArray(r)) return r; } // src/components/EntropyKey.js
-// import '../Styles/EntropyKey.css';
-
-var EntropyKey = function EntropyKey() {
+var EntropyKey = function EntropyKey(_ref) {
+  var character = _ref.character,
+    tokenlen = _ref.tokenlen;
   var _useState = (0, _react.useState)(''),
     _useState2 = _slicedToArray(_useState, 2),
     token = _useState2[0],
@@ -29,12 +29,12 @@ var EntropyKey = function EntropyKey() {
   var videoRef = (0, _react.useRef)(null);
   var tokenOutputRef = (0, _react.useRef)(null);
   var generateTokenFromVideo = /*#__PURE__*/function () {
-    var _ref = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee(length) {
+    var _ref2 = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee(length) {
       var characters, token, stream, video, canvas, context, imageData, i, randomIndex;
       return _regeneratorRuntime().wrap(function _callee$(_context) {
         while (1) switch (_context.prev = _context.next) {
           case 0:
-            characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()-_=+[]{}|;:",.<>?/~`';
+            characters = character || 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()-_=+[]{}|;:",.<>?/~`';
             token = '';
             _context.next = 4;
             return navigator.mediaDevices.getUserMedia({
@@ -68,16 +68,16 @@ var EntropyKey = function EntropyKey() {
       }, _callee);
     }));
     return function generateTokenFromVideo(_x) {
-      return _ref.apply(this, arguments);
+      return _ref2.apply(this, arguments);
     };
   }();
   var handleGenerateToken = /*#__PURE__*/function () {
-    var _ref2 = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee2() {
+    var _ref3 = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee2() {
       var tokenLength, newToken;
       return _regeneratorRuntime().wrap(function _callee2$(_context2) {
         while (1) switch (_context2.prev = _context2.next) {
           case 0:
-            tokenLength = 16;
+            tokenLength = tokenlen || 16;
             _context2.next = 3;
             return generateTokenFromVideo(tokenLength);
           case 3:
@@ -90,7 +90,7 @@ var EntropyKey = function EntropyKey() {
       }, _callee2);
     }));
     return function handleGenerateToken() {
-      return _ref2.apply(this, arguments);
+      return _ref3.apply(this, arguments);
     };
   }();
   var handleCopyToken = function handleCopyToken() {
